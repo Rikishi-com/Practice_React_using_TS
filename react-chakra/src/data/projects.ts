@@ -1,4 +1,4 @@
-import { ResultCardProps } from "../components/ResultCard"
+import type { ResultCardProps } from "../components/ResultCard"
 
 
 export const projects: ResultCardProps[] = [

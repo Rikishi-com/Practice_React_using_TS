@@ -18,7 +18,17 @@ export type ResultCardProps = {
 
 export default function ResultCard({ title, subtitle, result, description, skill, siteTitle, site, slideTitle, slide, githubTitle, github, period }: ResultCardProps){
     return(
-        <Card.Root variant="elevated" h={500} w={500}>
+        <Card.Root variant="elevated"
+        h={500} 
+        w={500} 
+        backgroundColor={'darkgray'} 
+        cursor="pointer" 
+        _hover={{
+            transform: "scale(1.03)",
+            boxShadow: "lg"
+        }}
+        transition="transform 0.3s ease, box-shadow 0.3s ease"
+        transformOrigin="center">
             <Card.Header>
                 <Card.Title>{title}</Card.Title>
                 <Card.Description>

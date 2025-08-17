@@ -285,3 +285,58 @@ export const projects: ResultCardProps[] = [
 - `<ResultCard>`:カード表示のコンポーネント
 - `key={i}`:Reactが要素を表示するための番号
 - `{...p}`:pの中身をそのまますべて`<ResultCard>`に渡すという意味
+
+
+### カーソルをあわせた際の動き
+
+使用例（カードにカーソルを合わせたときに拡大する動き）
+```tsx
+<Card.Root
+  variant="elevated"
+  h={500}
+  w={500}
+  backgroundColor={'darkgray'}
+  transition="transform 0.2s ease, box-shadow 0.2s ease"
+  transformOrigin="center"
+  cursor="pointer"
+  _hover={{
+    transform: 'scale(1.03)',
+    boxShadow: 'lg',
+  }}
+>
+```
+- `transition`: CSSであるプロパティの値が変化するとき，その変化をどのくらいの時間で，どのような動きで変えるかを指定するためのプロパティ
+- `_hover`: ホバー時（カーソルをある要素に乗せた状態）の動きを指定する
+- `cursor`: カーソルの形を定義．今回は`pointer`で手のようなカーソルに変化する
+- `ease`: 滑らかという意味
+
+
+### 画面表示時にポップアップさせる方法
+
+使用例
+```tsx
+import { motion } from "framer-motion"
+
+const MotionBox = motion(Box)
+
+~省略~
+<MotionBox
+    initial={{ opacity: 0, y: 24 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.5, ease: "easeOut" }}
+>
+~内容~
+<MotionBox>
+```
+- `import { motion } from "framer-motion"`: Framer Motionをインポートする
+- `const MotionBox = motion(Box)`: 通常の`Box`を動きのある`MotionBox`(任意名)に変換している
+- `initial`: 初期状態を指定するプロパティ
+- `opacity`: 透明度（0:完全に透明,1:完全に不透明）
+- `y: 24`: y軸方向の移動量（この場合は上に24分移動するという意味）
+- `animate`: 最終状態を指定するプロパティ．ユーザが見える最終的な状態を指定する
+- `transition`: アニメーションの時間や動きを制御するプロパティ．どのようにして初期状態から最終状態に遷移するか指定する
+- `duration`: アニメーションにかける時間
+- `ease`: 動きの加速，減速のパターン
+- `easeOut`: 最初は早く，だんだんゆっくり
+- `easeIn`: 最初はゆっくり，だんだん早くなる
+- `linear`: 一定速度
